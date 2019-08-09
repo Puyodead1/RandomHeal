@@ -1,0 +1,10 @@
+name: ${project.artifactId}
+version: ${project.version}
+author: Puyodead1
+main: me.puyodead1.randomheal.RandomHeal
+description: Better Heal for Random Package!
+commands:
+  randomheal:
+    description: main command
+  heal:
+    description: Heal command
