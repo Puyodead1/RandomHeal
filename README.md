@@ -1,5 +1,5 @@
 # RandomHeal (J.A.H.P Just Another Heal Plugin)
-Allows for /heal while keeping effects from RandomPackage
+Allows for /heal while keeping effects from RandomPackage (1.8-1.14)
 
 ## Dependencies:
 - None, works without any plugins
