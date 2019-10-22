@@ -15,22 +15,33 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml
-    - name: Upload artifact
-      uses: actions/upload-artifact@master
+#     - name: Upload artifact
+#       uses: actions/upload-artifact@master
+#       if: success()
+#       with:
+#         name: Artifact
+#         path: "artifact.jar"
+
+    - name: Upload Release
+      uses: JasonEtco/upload-to-release@v0.1.1
       if: success()
       with:
-        name: Artifact
-        path: "./target/*.jar"
+        args: "./target/*.jar"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#     - name: Discord notification
-#       env:
-#         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-#       uses: Ilshidur/action-discord@master
-#       with:
-#         args: '[RandomHeal] Build Complete'
-#     - name: Upload Release
-#       uses: JasonEtco/upload-to-release@v0.1.1
-#       with:
-#         args: target\*.jar
-#       env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Discord success notification
+      if: success()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: '[RandomHeal] Build Success!'
+
+    - name: Discord failure notification
+      if: success()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: '[RandomHeal] Build Success!'
