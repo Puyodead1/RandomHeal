@@ -16,20 +16,22 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean package --file pom.xml
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@master
-      if: success()
-      with:
-        name: Artifact
-        path: "/home/runner/work/RandomHeal/RandomHeal/target/*.jar"
+    - name: List
+      run: "ls"
+#     - name: Upload artifact
+#       uses: actions/upload-artifact@master
+#       if: success()
+#       with:
+#         name: Artifact
+#         path: "/home/runner/work/RandomHeal/RandomHeal/target/*.jar"
 
-    - name: Upload Release
-      uses: JasonEtco/upload-to-release@v0.1.1
-      if: success()
-      with:
-        args: "/home/runner/work/RandomHeal/RandomHeal/target/*.jar"
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+#     - name: Upload Release
+#       uses: JasonEtco/upload-to-release@v0.1.1
+#       if: success()
+#       with:
+#         args: "/home/runner/work/RandomHeal/RandomHeal/target/*.jar"
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
 
     - name: Discord success notification
       if: success()
