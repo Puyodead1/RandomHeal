@@ -1,12 +1,8 @@
-name: Java CI
-
+name: Build
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
@@ -25,8 +21,7 @@ jobs:
         
     - name: Create Release
       id: create_release
-      if: success()
-      uses: actions/create-release@master
+      uses: actions/create-release@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
       with:
@@ -34,6 +29,17 @@ jobs:
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
+        
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "./target/RandomHeal.jar"
+        asset_name: RandomHeal.jar
+        asset_content_type: application/java-archive
 
     - name: Discord success notification
       if: success()
