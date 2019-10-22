@@ -28,7 +28,7 @@ jobs:
       with:
         args: "./target/*.jar"
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
 
     - name: Discord success notification
       if: success()
