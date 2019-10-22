@@ -27,7 +27,7 @@ jobs:
       uses: JasonEtco/upload-to-release@v0.1.1
       if: success()
       with:
-        args: "./target/RandomHeal.jar"
+        args: "./target/RandomHeal.jar application/java-archive"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
 
