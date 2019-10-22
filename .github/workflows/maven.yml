@@ -22,14 +22,18 @@ jobs:
       with:
         name: Artifact
         path: "./target/RandomHeal.jar"
-
-    - name: Upload Release
-      uses: JasonEtco/upload-to-release@v0.1.1
+        
+    - name: Create Release
+      id: create_release
       if: success()
-      with:
-        args: "./target/RandomHeal.jar application/java-archive"
+      uses: actions/create-release@master
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
 
     - name: Discord success notification
       if: success()
