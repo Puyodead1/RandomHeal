@@ -18,12 +18,12 @@ jobs:
 
     - name: List
       run: "ls"
-#     - name: Upload artifact
-#       uses: actions/upload-artifact@master
-#       if: success()
-#       with:
-#         name: Artifact
-#         path: "/home/runner/work/RandomHeal/RandomHeal/target/*.jar"
+    - name: Upload artifact
+      uses: actions/upload-artifact@master
+      if: success()
+      with:
+        name: RandomHeal
+        path: "./target/RandomHeal-v1.0.0.jar"
 
 #     - name: Upload Release
 #       uses: JasonEtco/upload-to-release@v0.1.1
