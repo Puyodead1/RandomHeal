@@ -26,7 +26,7 @@ jobs:
       uses: JasonEtco/upload-to-release@v0.1.1
       if: success()
       with:
-        args: "./target/*.jar"
+        args: "/github/workspace/target/*.jar"
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
 
@@ -39,7 +39,7 @@ jobs:
         args: '[RandomHeal] Build Success!'
 
     - name: Discord failure notification
-      if: success()
+      if: failure()
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
