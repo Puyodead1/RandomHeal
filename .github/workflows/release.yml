@@ -1,7 +1,5 @@
-name: Java CI
-
+name: Create Release
 on: [release]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,13 +20,27 @@ jobs:
         name: Artifact
         path: "./target/RandomHeal.jar"
 
-    - name: Upload Release
-      uses: JasonEtco/upload-to-release@v0.1.1
-      if: success()
-      with:
-        args: "./target/RandomHeal.jar application/java-archive"
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_ }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./target/RandomHeal.jar
+        asset_name: RandomHeal.jar
+        asset_content_type: application/java-archive
 
     - name: Discord success notification
       if: success()
