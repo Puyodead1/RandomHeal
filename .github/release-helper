@@ -49,5 +49,3 @@ fi
 # Show pretty output, since we already have jq
 echo ::set-output name=COMMIT_MESSAGE::`cat $tmp | jq .commit.message`
 rm $tmp
-1
-Downloading1
